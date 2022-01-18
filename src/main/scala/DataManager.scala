@@ -19,5 +19,5 @@ object DataManager extends App{
   val conf = new SparkConf().setAppName("MNIST").setMaster("local")
   val sc = new SparkContext(conf)
   sc.addFile("data/t10k-labels.idx1-ubyte")
-  println("FINISH")
+
 }
