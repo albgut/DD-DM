@@ -1,4 +1,5 @@
 import org.apache.spark
+import org.apache.spark.mllib.util.MLUtils
 import org.apache.spark.{SparkConf, SparkContext}
 
 import java.nio.file.{Files, Paths}
@@ -17,4 +18,6 @@ object DataManager extends App{
   //val df = spark.read.format("image").option("dropInvalid", true).load("data/mllib/images/origin/kittens")
   val conf = new SparkConf().setAppName("MNIST").setMaster("local")
   val sc = new SparkContext(conf)
+  sc.addFile("data/t10k-labels.idx1-ubyte")
+  println("FINISH")
 }
