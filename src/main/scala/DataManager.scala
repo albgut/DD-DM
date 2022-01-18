@@ -5,6 +5,8 @@ import org.apache.spark.{SparkConf, SparkContext}
 import java.nio.file.{Files, Paths}
 
 object DataManager extends App{
+
+
   /*
   //val test_labels = scala.io.Source.fromFile("data/t10k-labels.idx1-ubyte")
   val labels = Files.readAllBytes(Paths.get("data/t10k-labels.idx1-ubyte"))
