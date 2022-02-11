@@ -1,7 +1,4 @@
-object m {
-  print('h')
+object Main extends App {
+  println("Hello, World!")
 
-  def main(args: Array[String]): Unit = {
-    print('o')
-  }
 }
