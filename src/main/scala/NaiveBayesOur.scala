@@ -11,7 +11,11 @@ object NaiveBayesOur extends App {
 
   val Array(training, test) = train.randomSplit(Array(0.6, 0.4))
 
+  val t0 = System.nanoTime
+
   val modelBayes = NaiveBayes.train(training, lambda = 1.0, modelType = "multinomial")
+
+  val t1 =System.nanoTime()
 
 
   val predictionAndLabelBayes = test.map(p => (modelBayes.predict(p.features), p.label))
@@ -20,9 +24,12 @@ object NaiveBayesOur extends App {
   val text = "#  ACCURACY BAYES = " + accuracyBayes + "     #"
   val size = text.length
   var line = ""
-  text.foreach(x => line += "#")
+  text.foreach(_ => line += "#")
   println(line)
   println("#  ACCURACY BAYES = " + accuracyBayes + "     #")
   println(line)
+
+  val duration = (System.nanoTime - t0) / 1e9d
+  println("duration : "+duration+" s")
 
 }
