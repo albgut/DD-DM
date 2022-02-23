@@ -1,5 +1,6 @@
 import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.mllib.classification.NaiveBayes
+import org.apache.spark.mllib.evaluation.MulticlassMetrics
 import org.apache.spark.mllib.tree.DecisionTree
 import org.apache.spark.mllib.util.MLUtils
 
@@ -22,9 +23,14 @@ object TestSparkMLLib extends App {
 
 
   val predictionAndLabelBayes = test.map(p => (modelBayes.predict(p.features), p.label))
-  val accuracyBayes = 1.0 * predictionAndLabelBayes.filter(x => x._1 == x._2).count() / test.count()
 
   val durationBayes = (t1Bayes - t0Bayes) / 1e9d
+
+  val metricsBayes = new MulticlassMetrics(predictionAndLabelBayes)
+  val accuracyBayes = metricsBayes.accuracy
+
+  var fMeasureBayes = ""
+  metricsBayes.labels.foreach(x => fMeasureBayes += "\t   F-MEASURE FOR " + x.toInt.toString + " = " + metricsBayes.fMeasure(x) + "\n")
 
   // DECISION TREE
 
@@ -43,21 +49,28 @@ object TestSparkMLLib extends App {
 
   val predictionAndLabelDT = test.map(p => (modelDT.predict(p.features), p.label))
 
-  val accuracyDT = 1.0 * predictionAndLabelDT.filter(x => x._1 == x._2).count() / test.count()
+  val metricsDT = new MulticlassMetrics(predictionAndLabelDT)
+  val accuracyDT = metricsDT.accuracy
+  var fMeasureDT = ""
+  metricsDT.labels.foreach(x => fMeasureDT += "\t   F-MEASURE FOR " + x.toInt.toString + " = " + metricsDT.fMeasure(x) + "\n")
 
   val durationDT = (t1DT - t0DT) / 1e9d
 
   // RANDOM FOREST
 
-  val text = "            ACCURACY BAYES = " + accuracyBayes + "           "
+  val text = "                 ACCURACY BAYES = " + accuracyBayes + "           "
   var line = ""
 
   text.foreach(_ => line += "=")
   println(line)
-  println("           ACCURACY BAYES = " + accuracyBayes + "     ")
-  println("         TIME TRAIN BAYES = " + durationBayes + "     ")
+  println("                ACCURACY BAYES = " + accuracyBayes + "     ")
+  println("              TIME TRAIN BAYES = " + durationBayes + "     ")
+  println()
+  println(fMeasureBayes)
   println(line)
-  println("   ACCURACY DECISION TREE = " + accuracyDT + "     ")
-  println(" TIME TRAIN DECISION TREE = " + durationDT + "     ")
+  println("        ACCURACY DECISION TREE = " + accuracyDT + "     ")
+  println("      TIME TRAIN DECISION TREE = " + durationDT + "     ")
+  println()
+  println(fMeasureDT)
   println(line)
 }
