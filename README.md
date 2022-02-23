@@ -7,7 +7,7 @@ enregistrer le fichier **mnist8m.bz2** de https://www.csie.ntu.edu.tw/~cjlin/lib
 ## Naive bayes
 Pour executer le Naive Bayes executer ```src/main/scala/NaiveBayesOur.scala```
 
-|accuracy| temps *(seconde)*|
+|accuracy| temps de l'apprentissage *(seconde)*|
 |--------|------|
 |0.8|5 |
 
