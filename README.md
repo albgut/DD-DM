@@ -3,7 +3,7 @@
 ## MLlib sur Spark
 
 
-##note du prof
+## note du prof
 
 Attention à l'operation collect :
 Elle permet de récupérer des données dans le cluster sur la machiine maître en array.
