@@ -2,18 +2,13 @@
 
 ## MLlib sur Spark
 
-enregistrer le fichier **mnist8m.bz2** de https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/multiclass.html#mnist8m dans le répertoire data du projet. Renommez le **big_data**.
+Pour éxécuter le programme lancez ```src/main/scala/TestSparkMLLib.scala```
 
-## Naive bayes
-Pour executer le Naive Bayes executer ```src/main/scala/NaiveBayesOur.scala```
+Cela utilise Naive Bayes puis Decision Tree sur un ensemble d'images de chiffres ( entre 0 et 9 ) écrits de manière manuscrite issus de la base de donnée mnist. Le programme affiche dans la console les résultats d'accuracy et de f-mesure pour les deux algorithme sur un ensemble de test généré aléatoirement.
 
-|accuracy| temps de l'apprentissage *(seconde)*|
-|--------|------|
-|0.8|5 |
+Voici un exemple de l'éxécution du programme : 
 
-## note du prof
+![](image/resultTestsMLLib.png)
 
-Attention à l'operation collect :
-Elle permet de récupérer des données dans le cluster sur la machiine maître en array.
-Mais une fois réalisé le parrallélisme est terminé.
-conseil : rester le plus longtemps possible sur la rdd et faire le collect à la fin
+
+Le rapport se trouve dans fichier suivant --TODO--.
